@@ -1,0 +1,39 @@
+{
+  "name": "deckmaker",
+  "version": "1.0.0",
+  "description": "A simple deck maker made with react and electron",
+  "main": "./src/main.js",
+  "scripts": {
+    "build": "webpack",
+    "dev-server": "webpack serve",
+    "start": "npm run build && electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/napo-lazo/deckMaker.git"
+  },
+  "author": "Jose Napoleon Lazo Celaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/napo-lazo/deckMaker/issues"
+  },
+  "homepage": "https://github.com/napo-lazo/deckMaker#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "css-loader": "^5.0.1",
+    "electron": "^10.1.5",
+    "node-sass": "^5.0.0",
+    "normalize.css": "^8.0.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass-loader": "^10.0.5",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
