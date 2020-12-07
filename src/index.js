@@ -1,4 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import DeckMaker from './Components/DeckMaker';
+import 'normalize.css/normalize.css'; 
+import './styles/styles.scss';
 
-ReactDOM.render(<h1>Deck Maker</h1>, document.getElementById('app'));
+ReactDOM.render(<DeckMaker/>, document.getElementById('app'));

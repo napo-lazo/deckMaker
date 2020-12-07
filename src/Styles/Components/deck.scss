@@ -1,0 +1,21 @@
+.deck {
+  width: 16rem;
+  position: relative;
+}
+
+.deck__DeckCase {
+  height: 16rem;
+  width: 16rem;
+}
+
+.deck__GameIcon {
+  height: 25%;
+  width: 45%;
+  position: absolute;
+  top: 28%;
+  left: 0;
+}
+
+.deck__Name {
+  text-align: center;
+}
