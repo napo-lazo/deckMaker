@@ -5,9 +5,11 @@ import Typography from '@material-ui/core/Typography';
 const Deck = (props) => {
   return (
     <Box className='deck'>
-      <img className='deck__DeckCase' src='/Images/deck-case1.png'/>
-      <img className='deck__GameIcon' src='/Images/hearthstone-icon.png'/>
-      <Typography className='deck__Name' variant='h3'>Nombre mucho mas grande que el pasado</Typography>
+      <Box className='deck__Image'>
+        <img className='deck__Image__DeckCase' src='/Images/deck-case2_darker.png'/>
+        <img className='deck__Image__GameIcon' src={'/Images/' + props.deckInfo.game + '-icon.png'}/>
+      </Box>
+      <Typography className='deck__Name' variant='h3'>{props.deckInfo.name}</Typography>
     </Box>
   )
 }

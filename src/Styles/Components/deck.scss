@@ -1,18 +1,21 @@
 .deck {
   width: 16rem;
+}
+
+.deck__Image {
   position: relative;
 }
 
-.deck__DeckCase {
+.deck__Image__DeckCase {
   height: 16rem;
   width: 16rem;
 }
 
-.deck__GameIcon {
-  height: 25%;
+.deck__Image__GameIcon {
+  height: 45%;
   width: 45%;
   position: absolute;
-  top: 28%;
+  top: 50%;
   left: 0;
 }
 

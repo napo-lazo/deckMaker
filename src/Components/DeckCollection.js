@@ -8,48 +8,15 @@ class DeckCollection extends React.Component {
     return (
       <Box className='collectionContainer'>
         <Grid container spacing={2}>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
-          <Grid item xs='auto'>
-            <Deck />
-          </Grid>
+          {
+            this.props.decksInfo.map((deck) => {
+              return(
+                <Grid item xs='auto'>
+                  <Deck deckInfo={deck}/>
+                </Grid>
+              )
+            })
+          }
         </Grid>
       </Box>
     )
