@@ -1,6 +1,6 @@
-import React from 'react';
-import DeckCollection from './DeckCollection';
 import Box from '@material-ui/core/Box';
+import DeckCollectionPage from './DeckCollectionPage';
+import React from 'react';
 
 class DeckMaker extends React.Component {
   state = {
@@ -23,7 +23,7 @@ class DeckMaker extends React.Component {
   render() {
     return(
       <Box className='appContainer'>
-        <DeckCollection decksInfo={this.state.decksInfo}/>
+        <DeckCollectionPage decksInfo={this.state.decksInfo}/>
       </Box>
     )
   }

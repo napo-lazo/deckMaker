@@ -1,4 +1,7 @@
 @import './base/base';
-@import './Components/deckMaker';
-@import './Components/deckCollection';
+
+@import './Components//addDeck';
 @import './Components/deck';
+@import './Components/deckCollection';
+@import './Components/deckCollectionPage';
+@import './Components/deckMaker';
