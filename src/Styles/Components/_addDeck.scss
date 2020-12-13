@@ -8,5 +8,21 @@
 }
 
 .addDeck__OptionsContainer__Option {
-  width: 80%;
+  width: 90%;
+}
+
+.addDeck__Title {
+  // flex-grow: 1;
+  padding-top: 2.4rem;
+}
+
+.addDeck__Selects {
+  // flex-grow: 2;
+  // padding-bottom: 35rem;
+  padding-bottom: 1.6rem;
+}
+
+.addDeck__Button {
+  // flex-grow: 1;
+  padding: 1.6rem 0;
 }

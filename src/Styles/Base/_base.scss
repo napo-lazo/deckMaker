@@ -5,6 +5,8 @@ html {
 body {
   height: 100vh;
   width: 100vw;
+  // min-width: 56.7rem;
+  overflow-y: hidden;
 }
 
 * {
