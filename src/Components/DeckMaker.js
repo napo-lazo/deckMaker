@@ -23,10 +23,22 @@ class DeckMaker extends React.Component {
     ]
   }
 
+  handleCreateNewDeck = (addDeckState) => {
+
+    const aux = [addDeckState];
+    console.log(addDeckState);
+
+    this.setState((prevState) => {
+      return {
+        decksInfo: prevState.decksInfo.concat(aux)
+      }
+    })
+  };
+
   render() {
     return(
       <Box className='appContainer'>
-        <DeckCollectionPage decksInfo={this.state.decksInfo}/>
+        <DeckCollectionPage decksInfo={this.state.decksInfo} handleCreateNewDeck={this.handleCreateNewDeck}/>
       </Box>
     )
   }

@@ -73,6 +73,19 @@ class AddDeck extends React.Component {
     })
   };
 
+  handleCreateNewDeck = () => {
+    
+    this.props.handleCreateNewDeck(this.state);
+    
+    this.setState(() => {
+      return {
+        game: '',
+        format: '',
+        hClass: ''
+      }
+    });
+  };
+
   render() {
     return (
       <Grid className='addDeck' container item direction='column' justify='space-between' alignItems='center' wrap='nowrap'>
@@ -112,7 +125,7 @@ class AddDeck extends React.Component {
           </Grid>
         </Grid>
         <Grid item className='addDeck__Button'>
-          <Button variant="contained" style={resizedSmallFont}>Create new deck</Button>
+          <Button variant="contained" style={resizedSmallFont} onClick={this.handleCreateNewDeck}>Create new deck</Button>
         </Grid>
       </Grid>
     )
