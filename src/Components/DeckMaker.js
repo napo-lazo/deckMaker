@@ -7,15 +7,18 @@ class DeckMaker extends React.Component {
     decksInfo: [
       {
         name: 'My first deck',
-        game: 'hearthstone'
+        game: 'hearthstone',
+        hClass: 'warrior'
       },
       {
         name: 'My second deck',
-        game: 'hearthstone'
+        game: 'hearthstone',
+        hClass: 'demonhunter'
       },
       {
         name: 'Frostmage',
-        game: 'hearthstone'
+        game: 'hearthstone',
+        hClass: 'mage'
       }
     ]
   }

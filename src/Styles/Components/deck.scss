@@ -12,11 +12,27 @@
 }
 
 .deck__Image__GameIcon {
-  height: 45%;
-  width: 45%;
+  height: 40%;
+  width: 40%;
   position: absolute;
-  top: 50%;
-  left: 0;
+  top: 60%;
+  left: 0%;
+}
+
+.deck__Image__ClassIcon {
+  // height: 25%;
+  // width: 25%;
+  // height: 40%;
+  // width: 40%;
+  height: 32%;
+  width: 32%;
+  position: absolute;
+  top: 45%;
+  // left: 40%;
+  // left: 20%;
+  // left: 10%;
+  left: -7%;
+  -webkit-filter: drop-shadow(-3px 2.5px 1px rgba(0,0,0,0.5));
 }
 
 .deck__Name {
