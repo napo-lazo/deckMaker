@@ -46,13 +46,25 @@ class AddDeck extends React.Component {
   state = {
     game: '',
     format: '',
-    hClass: ''
+    hClass: '',
+    hClassDisabled: true,
+    gameError: false,
+    formatError: false,
+    hClassError: false
   };
 
   handleGameSelect = (event) => {
+
+    let disabled = true;
+
+    if (event.target.value == 'hearthstone'){
+      disabled = false;
+    }
+
     this.setState(() => {
       return {
-        game: event.target.value
+        game: event.target.value,
+        hClassDisabled: disabled
       }
     })
   };
@@ -75,6 +87,35 @@ class AddDeck extends React.Component {
 
   handleCreateNewDeck = () => {
     
+    let stop = false;
+    let gameError;
+    let formatError;
+    let hClassError;
+
+    if (this.state.game == '') {
+      gameError = true;
+      stop = true;
+    }
+    if (this.state.format == '') {
+      formatError = true;
+      stop = true;
+    }
+    if (this.state.hClass == '' && !this.state.hClassDisabled) {
+      hClassError = true;
+      stop = true;
+    }
+
+    if (stop) {
+      this.setState(() => {
+        return {
+          gameError: gameError,
+          formatError: formatError,
+          hClassError: hClassError
+        }
+      })
+      return;
+    }
+
     this.props.handleCreateNewDeck(this.state);
     
     this.setState(() => {
@@ -94,24 +135,26 @@ class AddDeck extends React.Component {
         </Grid>
         <Grid container item direction='column' justify='center' alignItems='center' className='addDeck__Selects' spacing='10'>
           <Grid container item className='addDeck__OptionsContainer' justify='center'>
-            <FormControl className='addDeck__OptionsContainer__Option'>
+            <FormControl className='addDeck__OptionsContainer__Option' error={this.state.gameError}>
               <InputLabel style={resizedLargeFont}>Game</InputLabel>
               <Select value={this.state.game} onChange={this.handleGameSelect} style={resizedLargeFont}>
                 <MenuItem value={'hearthstone'} style={resizedMediumFont}>Hearthstone</MenuItem>
               </Select>
+              {this.state.gameError && <FormHelperText style={resizedSmallFont}>Field cannot be empty</FormHelperText>}
             </FormControl>
             </Grid>
             <Grid container item className='addDeck__OptionsContainer' justify='center'>
-            <FormControl className='addDeck__OptionsContainer__Option'>
+            <FormControl className='addDeck__OptionsContainer__Option' error={this.state.formatError}>
               <InputLabel style={resizedLargeFont}>Format</InputLabel>
               <Select value={this.state.format} onChange={this.handleFormatSelect} style={resizedLargeFont}>
                 <MenuItem value={'standard'} style={resizedMediumFont}>Standard</MenuItem>
                 <MenuItem value={'wild'} style={resizedMediumFont}>Wild</MenuItem>
               </Select>
+              {this.state.formatError && <FormHelperText style={resizedSmallFont}>Field cannot be empty</FormHelperText>}
             </FormControl>
             </Grid>
             <Grid container item className='addDeck__OptionsContainer' justify='center' wrap='nowrap'>
-            <FormControl className='addDeck__OptionsContainer__Option'>
+            <FormControl className='addDeck__OptionsContainer__Option' disabled={this.state.hClassDisabled} error={this.state.hClassError}>
               <InputLabel style={resizedLargeFont}>Class</InputLabel>
               <Select value={this.state.hClass} onChange={this.handleHClassSelect} style={resizedLargeFont} MenuProps={{PaperProps: {style: test}}}>
                 {
@@ -120,7 +163,8 @@ class AddDeck extends React.Component {
                   )
                 }
               </Select>
-              <FormHelperText style={resizedSmallFont}>Only available for Hearthstone decks</FormHelperText>
+              {this.state.hClassDisabled && <FormHelperText style={resizedSmallFont}>Only available for Hearthstone decks</FormHelperText>}
+              {this.state.hClassError && <FormHelperText style={resizedSmallFont}>Field cannot be empty</FormHelperText>}
             </FormControl>
           </Grid>
         </Grid>
