@@ -1,9 +1,11 @@
 import Box from '@material-ui/core/Box';
 import DeckCollectionPage from './DeckCollectionPage';
+import EditDeckPage from './EditDeckPage';
 import React from 'react';
 
 class DeckMaker extends React.Component {
   state = {
+    activeDeck: undefined,
     decksInfo: [
       {
         name: 'My first deck',
@@ -26,10 +28,11 @@ class DeckMaker extends React.Component {
   handleCreateNewDeck = (addDeckState) => {
 
     const aux = [addDeckState];
-    console.log(addDeckState);
+    // console.log(addDeckState);
 
     this.setState((prevState) => {
       return {
+        activeDeck: addDeckState,
         decksInfo: prevState.decksInfo.concat(aux)
       }
     })
@@ -38,7 +41,12 @@ class DeckMaker extends React.Component {
   render() {
     return(
       <Box className='appContainer'>
+      {(!this.state.activeDeck) 
+        ?
         <DeckCollectionPage decksInfo={this.state.decksInfo} handleCreateNewDeck={this.handleCreateNewDeck}/>
+        :
+        <EditDeckPage activeDeck={this.state.activeDeck} />
+      }
       </Box>
     )
   }
