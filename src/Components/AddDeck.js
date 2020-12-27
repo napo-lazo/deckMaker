@@ -148,9 +148,9 @@ class AddDeck extends React.Component {
               </Select>
               {this.state.gameError && <FormHelperText style={resizedSmallFont}>Field cannot be empty</FormHelperText>}
             </FormControl>
-            </Grid>
+          </Grid>
 
-            <Grid container item className='addDeck__OptionsContainer' justify='center'>
+          <Grid container item className='addDeck__OptionsContainer' justify='center'>
             <FormControl className='addDeck__OptionsContainer__Option' error={this.state.formatError}>
               <InputLabel style={resizedLargeFont}>Format</InputLabel>
               <Select value={this.state.format} onChange={this.handleFormatSelect} style={resizedLargeFont}>
@@ -159,9 +159,9 @@ class AddDeck extends React.Component {
               </Select>
               {this.state.formatError && <FormHelperText style={resizedSmallFont}>Field cannot be empty</FormHelperText>}
             </FormControl>
-            </Grid>
+          </Grid>
 
-            <Grid container item className='addDeck__OptionsContainer' justify='center' wrap='nowrap'>
+          <Grid container item className='addDeck__OptionsContainer' justify='center' wrap='nowrap'>
             <FormControl className='addDeck__OptionsContainer__Option' disabled={this.state.hClassDisabled} error={this.state.hClassError}>
               <InputLabel style={resizedLargeFont}>Class</InputLabel>
               <Select value={this.state.hClass} onChange={this.handleHClassSelect} style={resizedLargeFont} MenuProps={{PaperProps: {style: test}}}>
