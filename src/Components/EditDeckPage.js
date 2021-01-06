@@ -1,12 +1,23 @@
+import DeckOptions from './DeckOptions';
 import EditDeckFilters from './EditDeckFilters';
+import FoundCards from './FoundCards';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 
 class EditDeckPage extends React.Component {
 
   state = {
-    filtersInfo: {}
+    filtersInfo: {},
+    cards: []
   }
+
+  setFoundCards = ((cards) => {
+    this.setState(() => {
+      return {
+        cards: cards
+      }
+    })
+  }) 
 
   componentDidMount() {
     if(this.props.activeDeck.game == 'hearthstone') {
@@ -42,13 +53,17 @@ class EditDeckPage extends React.Component {
       
         <Grid className='upper' container item style={{width: '100%'}} wrap='nowrap'>
           <Grid className='container' item style={{width: '70%'}}>
-            <EditDeckFilters filtersInfo={this.state.filtersInfo} format={this.props.activeDeck.format} hClass={this.props.activeDeck.hClass}/>
+            <EditDeckFilters cards={this.cards} filtersInfo={this.state.filtersInfo} format={this.props.activeDeck.format} hClass={this.props.activeDeck.hClass} setFoundCards={this.setFoundCards}/>
           </Grid>
-          <Grid className='container' item style={{width: '30%'}}></Grid>
+          <Grid className='container' item style={{width: '30%'}}>
+            <DeckOptions />
+          </Grid>
         </Grid>
 
         <Grid  className='lower' container item style={{width: '100%'}} wrap='nowrap'>
-          <Grid className='container' item style={{width: '80%'}}></Grid>
+          <Grid className='container' item style={{width: '80%'}}>
+            <FoundCards cards={this.state.cards}/>
+          </Grid>
           <Grid className='container' item style={{width: '20%'}}></Grid>
         </Grid>
 
