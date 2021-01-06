@@ -31,6 +31,27 @@ class DeckMaker extends React.Component {
     ]
   }
 
+  handleExitDeckEditing = () => {
+
+    console.log('exiting')
+
+    this.setState(() => {
+      return {
+        activeDeck: null
+      }
+    })
+  }
+
+  handleSavingDeck = (newCards) => {
+
+    this.setState((prevState) => {
+      return {
+        activeDeck: {...prevState.activeDeck, cards: newCards}
+      }
+    })
+
+  }
+
   handleCreateNewDeck = (addDeckState) => {
 
     const aux = [addDeckState];
@@ -51,7 +72,7 @@ class DeckMaker extends React.Component {
         ?
         <DeckCollectionPage decksInfo={this.state.decksInfo} handleCreateNewDeck={this.handleCreateNewDeck}/>
         :
-        <EditDeckPage activeDeck={this.state.activeDeck}/>
+        <EditDeckPage activeDeck={this.state.activeDeck} handleExitDeckEditing={this.handleExitDeckEditing} handleSavingDeck={this.handleSavingDeck}/>
       }
       </Box>
     )

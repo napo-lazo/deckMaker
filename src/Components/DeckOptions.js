@@ -4,6 +4,11 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
 class DeckOptions extends React.Component {
+
+  handleSavingDeck = () => {
+    this.props.handleSavingDeck(this.props.cards);
+  }
+
   render() {
     return (
       <Grid container spacing='2'>
@@ -12,10 +17,10 @@ class DeckOptions extends React.Component {
         </Grid>
         <Grid alignItems='center' container item justify='space-evenly'>
           <Grid item>
-            <Button variant='contained'>Exit</Button>
+            <Button id='Exit' onClick={this.props.handleExitDeckEditing} variant='contained'>Exit</Button>
           </Grid>
           <Grid item>
-            <Button variant='contained'>Save Deck</Button>
+            <Button id='Save' onClick={this.props.handleSavingDeck} variant='contained'>Save Deck</Button>
           </Grid>
         </Grid>
       </Grid>
