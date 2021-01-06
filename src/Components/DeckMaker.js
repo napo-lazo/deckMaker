@@ -9,7 +9,8 @@ class DeckMaker extends React.Component {
       name: 'My first deck',
       game: 'hearthstone',
       hClass: 'warrior',
-      format: 'standard'
+      format: 'standard',
+      cards: []
     },
     decksInfo: [
       {
@@ -50,7 +51,7 @@ class DeckMaker extends React.Component {
         ?
         <DeckCollectionPage decksInfo={this.state.decksInfo} handleCreateNewDeck={this.handleCreateNewDeck}/>
         :
-        <EditDeckPage activeDeck={this.state.activeDeck} />
+        <EditDeckPage activeDeck={this.state.activeDeck}/>
       }
       </Box>
     )

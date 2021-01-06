@@ -11,7 +11,7 @@ class FoundCards extends React.Component {
           this.props.cards.map((card) => {
           return (
             <Grid item>
-              <Card cardInfo={card}/>
+              <Card cardInfo={card} handleAddCardToDeck={this.props.handleAddCardToDeck}/>
             </Grid>
           )
         })}

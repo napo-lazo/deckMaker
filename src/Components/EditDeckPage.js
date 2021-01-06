@@ -1,3 +1,4 @@
+import DeckCardsListing from './DeckCardsListing';
 import DeckOptions from './DeckOptions';
 import EditDeckFilters from './EditDeckFilters';
 import FoundCards from './FoundCards';
@@ -8,13 +9,25 @@ class EditDeckPage extends React.Component {
 
   state = {
     filtersInfo: {},
-    cards: []
+    foundCards: [],
+    deckCards: this.props.activeDeck.cards
   }
+
+  handleAddCardToDeck = (newCard) => {
+    const aux = [newCard];
+
+    this.setState((prevState) => {
+      return {
+        deckCards: prevState.deckCards.concat(aux)
+      }
+    })
+
+  };
 
   setFoundCards = ((cards) => {
     this.setState(() => {
       return {
-        cards: cards
+        foundCards: cards
       }
     })
   }) 
@@ -53,7 +66,7 @@ class EditDeckPage extends React.Component {
       
         <Grid className='upper' container item style={{width: '100%'}} wrap='nowrap'>
           <Grid className='container' item style={{width: '70%'}}>
-            <EditDeckFilters cards={this.cards} filtersInfo={this.state.filtersInfo} format={this.props.activeDeck.format} hClass={this.props.activeDeck.hClass} setFoundCards={this.setFoundCards}/>
+            <EditDeckFilters filtersInfo={this.state.filtersInfo} format={this.props.activeDeck.format} hClass={this.props.activeDeck.hClass} setFoundCards={this.setFoundCards}/>
           </Grid>
           <Grid className='container' item style={{width: '30%'}}>
             <DeckOptions />
@@ -62,9 +75,11 @@ class EditDeckPage extends React.Component {
 
         <Grid  className='lower' container item style={{width: '100%'}} wrap='nowrap'>
           <Grid className='container' item style={{width: '80%'}}>
-            <FoundCards cards={this.state.cards}/>
+            <FoundCards cards={this.state.foundCards} handleAddCardToDeck={this.handleAddCardToDeck}/>
           </Grid>
-          <Grid className='container' item style={{width: '20%'}}></Grid>
+          <Grid className='container' item style={{width: '20%'}}>
+            <DeckCardsListing deckCards={this.state.deckCards}/>
+          </Grid>
         </Grid>
 
       </Grid>

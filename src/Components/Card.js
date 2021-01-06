@@ -2,10 +2,18 @@ import Box from '@material-ui/core/Box'
 import React from 'react';
 
 class Card extends React.Component {
+
+  onCardClicked = () => {
+    //console.log(this.props.cardInfo);
+
+    this.props.handleAddCardToDeck(this.props.cardInfo);
+
+  }
+
   render(){
     return(
       <Box>
-        <img src={"/Images/card assets/" + this.props.cardInfo.cardId + ".png"} />
+        <img onClick={this.onCardClicked} src={"/Images/card assets/" + this.props.cardInfo.cardId + ".png"} />
       </Box>
     )
   }
