@@ -5,8 +5,8 @@ import TextField from '@material-ui/core/TextField';
 
 class DeckOptions extends React.Component {
 
-  handleSavingDeck = () => {
-    this.props.handleSavingDeck(this.props.cards);
+  handleSavingActiveDeck = () => {
+    this.props.handleSavingActiveDeck(this.props.cards);
   }
 
   render() {
@@ -20,7 +20,7 @@ class DeckOptions extends React.Component {
             <Button id='Exit' onClick={this.props.handleExitDeckEditing} variant='contained'>Exit</Button>
           </Grid>
           <Grid item>
-            <Button id='Save' onClick={this.props.handleSavingDeck} variant='contained'>Save Deck</Button>
+            <Button id='Save' onClick={this.handleSavingActiveDeck} variant='contained'>Save Deck</Button>
           </Grid>
         </Grid>
       </Grid>

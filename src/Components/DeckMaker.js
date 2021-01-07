@@ -55,11 +55,33 @@ class DeckMaker extends React.Component {
     })
   }
 
-  handleSavingDeck = (newCards) => {
+  handleSavingActiveDeck = (newCards) => {
+
+    this.setState(
+      (prevState) => {
+        return {
+          activeDeck: {...prevState.activeDeck, cards: newCards}
+        }
+      },
+      this.handleSavingDeck
+    )
+
+  }
+
+  handleSavingDeck = () => {
+
+    console.log(this.state.activeDeck)
+
+    const updatedDeck = this.state.activeDeck;
+    const i = updatedDeck.index;
+    delete updatedDeck.index;
 
     this.setState((prevState) => {
+
+      prevState.decksInfo.splice(i, 1, updatedDeck)
+
       return {
-        activeDeck: {...prevState.activeDeck, cards: newCards}
+        decksInfo: prevState.decksInfo
       }
     })
 
@@ -69,7 +91,7 @@ class DeckMaker extends React.Component {
     
     this.setState(() => {
       return {
-        activeDeck: this.state.decksInfo[index]
+        activeDeck: {...this.state.decksInfo[index], index}
       }
     })
 
@@ -82,7 +104,7 @@ class DeckMaker extends React.Component {
         ?
         <DeckCollectionPage decksInfo={this.state.decksInfo} handleCreateNewDeck={this.handleCreateNewDeck} handleSettingActiveDeck={this.handleSettingActiveDeck}/>
         :
-        <EditDeckPage activeDeck={this.state.activeDeck} handleExitDeckEditing={this.handleExitDeckEditing} handleSavingDeck={this.handleSavingDeck}/>
+        <EditDeckPage activeDeck={this.state.activeDeck} handleExitDeckEditing={this.handleExitDeckEditing} handleSavingActiveDeck={this.handleSavingActiveDeck}/>
       }
       </Box>
     )

@@ -69,7 +69,7 @@ class EditDeckPage extends React.Component {
             <EditDeckFilters filtersInfo={this.state.filtersInfo} format={this.props.activeDeck.format} hClass={this.props.activeDeck.hClass} setFoundCards={this.setFoundCards}/>
           </Grid>
           <Grid className='container' item style={{width: '30%'}}>
-            <DeckOptions deckName={this.props.activeDeck.name} cards={this.state.deckCards} handleExitDeckEditing={this.props.handleExitDeckEditing} handleSavingDeck={this.handleSavingDeck}/>
+            <DeckOptions deckName={this.props.activeDeck.name} cards={this.state.deckCards} handleExitDeckEditing={this.props.handleExitDeckEditing} handleSavingActiveDeck={this.props.handleSavingActiveDeck}/>
           </Grid>
         </Grid>
 
