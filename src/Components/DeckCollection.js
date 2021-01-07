@@ -8,10 +8,10 @@ class DeckCollection extends React.Component{
     return (
       <Grid container item spacing={2}>
       {
-        this.props.decksInfo.map((deck) => {
+        this.props.decksInfo.map((deck, index) => {
           return(
-            <Grid item xs='auto'>
-              <Deck deckInfo={deck}/>
+            <Grid item key={deck.name} xs='auto'>
+              <Deck deckInfo={{...deck, index}} handleSettingActiveDeck={this.props.handleSettingActiveDeck}/>
             </Grid>
           )
         })

@@ -13,7 +13,7 @@ class DeckOptions extends React.Component {
     return (
       <Grid container spacing='2'>
         <Grid container item>
-          <TextField fullWidth label='Deck Name' variant='outlined'></TextField>
+          <TextField fullWidth label='Deck Name' variant='outlined' value={this.props.deckName}></TextField>
         </Grid>
         <Grid alignItems='center' container item justify='space-evenly'>
           <Grid item>

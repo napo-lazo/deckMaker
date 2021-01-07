@@ -3,8 +3,13 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 const Deck = (props) => {
+
+  const handleDeckClick = () => {
+    props.handleSettingActiveDeck(props.deckInfo.index);
+  }
+
   return (
-    <Box className='deck'>
+    <Box className='deck' onClick={handleDeckClick}>
       <Box className='deck__Image'>
         <img className='deck__Image__DeckCase' src='/Images/deck-case2_darker.png'/>
         <img className ='deck__Image__ClassIcon' src={'/Images/' + props.deckInfo.hClass + '-icon.png'}/>

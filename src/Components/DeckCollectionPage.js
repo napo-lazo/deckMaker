@@ -11,7 +11,7 @@ class DeckCollectionPage extends React.Component {
     return (
       <Grid container className='deckCollectionPageContainer' wrap='nowrap'>
         <Box className='deckCollectionContainer'>
-          <DeckCollection decksInfo={this.props.decksInfo}/>
+          <DeckCollection decksInfo={this.props.decksInfo} handleSettingActiveDeck={this.props.handleSettingActiveDeck}/>
         </Box>
         <Box className ='addDeckContainer'>
           <AddDeck handleCreateNewDeck={this.props.handleCreateNewDeck}/>

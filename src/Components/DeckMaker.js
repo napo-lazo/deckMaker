@@ -5,31 +5,44 @@ import React from 'react';
 
 class DeckMaker extends React.Component {
   state = {
-    activeDeck: {
-      name: 'My first deck',
-      game: 'hearthstone',
-      hClass: 'warrior',
-      format: 'standard',
-      cards: []
-    },
+    activeDeck: null,
     decksInfo: [
       {
         name: 'My first deck',
         game: 'hearthstone',
-        hClass: 'warrior'
+        hClass: 'warrior',
+        format: 'standard',
+        cards: []
       },
       {
         name: 'My second deck',
         game: 'hearthstone',
-        hClass: 'demonhunter'
+        hClass: 'demonhunter',
+        format: 'standard',
+        cards: []
       },
       {
         name: 'Frostmage',
         game: 'hearthstone',
-        hClass: 'mage'
+        hClass: 'mage',
+        format: 'standard',
+        cards: []
       }
     ]
   }
+
+  handleCreateNewDeck = (addDeckState) => {
+
+    const aux = [addDeckState];
+    // console.log(addDeckState);
+
+    this.setState((prevState) => {
+      return {
+        activeDeck: addDeckState,
+        decksInfo: prevState.decksInfo.concat(aux)
+      }
+    })
+  };
 
   handleExitDeckEditing = () => {
 
@@ -52,25 +65,22 @@ class DeckMaker extends React.Component {
 
   }
 
-  handleCreateNewDeck = (addDeckState) => {
-
-    const aux = [addDeckState];
-    // console.log(addDeckState);
-
-    this.setState((prevState) => {
+  handleSettingActiveDeck = (index) => {
+    
+    this.setState(() => {
       return {
-        activeDeck: addDeckState,
-        decksInfo: prevState.decksInfo.concat(aux)
+        activeDeck: this.state.decksInfo[index]
       }
     })
-  };
+
+  }
 
   render() {
     return(
       <Box className='appContainer'>
       {(!this.state.activeDeck) 
         ?
-        <DeckCollectionPage decksInfo={this.state.decksInfo} handleCreateNewDeck={this.handleCreateNewDeck}/>
+        <DeckCollectionPage decksInfo={this.state.decksInfo} handleCreateNewDeck={this.handleCreateNewDeck} handleSettingActiveDeck={this.handleSettingActiveDeck}/>
         :
         <EditDeckPage activeDeck={this.state.activeDeck} handleExitDeckEditing={this.handleExitDeckEditing} handleSavingDeck={this.handleSavingDeck}/>
       }
