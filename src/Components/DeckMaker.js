@@ -5,26 +5,32 @@ import React from 'react';
 
 class DeckMaker extends React.Component {
   state = {
-    activeDeck: null,
+    activeDeck: {
+      name: 'My first deck',
+      game: 'hearthstone',
+      hClass: 'Warrior',
+      format: 'standard',
+      cards: []
+    },
     decksInfo: [
       {
         name: 'My first deck',
         game: 'hearthstone',
-        hClass: 'warrior',
+        hClass: 'Warrior',
         format: 'standard',
         cards: []
       },
       {
         name: 'My second deck',
         game: 'hearthstone',
-        hClass: 'demonhunter',
+        hClass: 'Demon Hunter',
         format: 'standard',
         cards: []
       },
       {
         name: 'Frostmage',
         game: 'hearthstone',
-        hClass: 'mage',
+        hClass: 'Mage',
         format: 'standard',
         cards: []
       }

@@ -167,7 +167,7 @@ class AddDeck extends React.Component {
               <Select value={this.state.hClass} onChange={this.handleHClassSelect} style={resizedLargeFont} MenuProps={{PaperProps: {style: test}}}>
                 {
                   this.hearthstoneClasses.map((hClass) => 
-                    <MenuItem value={hClass.toLowerCase()} style={resizedMediumFont}>{hClass}</MenuItem>
+                    <MenuItem value={hClass} style={resizedMediumFont}>{hClass}</MenuItem>
                   )
                 }
               </Select>

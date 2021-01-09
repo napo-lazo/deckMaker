@@ -47,6 +47,7 @@ class EditDeckPage extends React.Component {
           return {
             filtersInfo: {
               cardQualities: info.qualities,
+              cardRaces: info.races,
               cardTypes: info.types,
               standardSets: info.standard,
               wildSets: info.wild
