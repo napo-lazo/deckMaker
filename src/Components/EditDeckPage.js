@@ -13,14 +13,37 @@ class EditDeckPage extends React.Component {
     deckCards: this.props.activeDeck.cards
   }
 
+  checkForCardDuplicates = (newCard, maxAmount) => {
+
+    const aux = Array.from(this.state.deckCards);
+
+    while(maxAmount > 0){
+      const index = aux.findIndex(card => card.name == newCard.name);
+      if(index != -1){
+        aux.splice(index, 1);
+        maxAmount--;
+      }
+      else{
+        return false;
+      }
+
+    }
+
+    return true;
+  }
+
   handleAddCardToDeck = (newCard) => {
     const aux = [newCard];
 
-    this.setState((prevState) => {
-      return {
-        deckCards: prevState.deckCards.concat(aux)
-      }
-    })
+    if(!this.checkForCardDuplicates(newCard, 2)){
+
+      this.setState((prevState) => {
+        return {
+          deckCards: prevState.deckCards.concat(aux)
+        }
+      })
+
+    }
 
   };
 
