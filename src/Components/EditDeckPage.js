@@ -13,39 +13,54 @@ class EditDeckPage extends React.Component {
     deckCards: this.props.activeDeck.cards
   }
 
-  checkForCardDuplicates = (newCard, maxAmount) => {
+  handleAddCardToDeck = (newCard) => {
 
-    const aux = Array.from(this.state.deckCards);
+    //TODO: Remove hardcoded max amount
+    const maxAmount = 2;
 
-    while(maxAmount > 0){
-      const index = aux.findIndex(card => card.name == newCard.name);
-      if(index != -1){
-        aux.splice(index, 1);
-        maxAmount--;
+    this.setState((prevState) => {
+
+      let auxList = prevState.deckCards;
+      const index = auxList.findIndex(card => card.cardData.name == newCard.name);
+      
+      if (index != -1) {
+
+        const temp = prevState.deckCards[index];
+
+        if(temp.quantity < maxAmount) {
+          temp.quantity += 1;
+        }
       }
-      else{
-        return false;
+      else {
+        auxList = auxList.concat([{ cardData: newCard, quantity: 1}])
       }
 
-    }
+      return {
+        deckCards: auxList
+      }
+    })
 
-    return true;
   }
 
-  handleAddCardToDeck = (newCard) => {
-    const aux = [newCard];
+  handleRemoveCardFromDeck = (oldCardName) => {
+    const auxList = Array.from(this.state.deckCards);
+    const index = auxList.findIndex(card => card.cardData.name == oldCardName);
 
-    if(!this.checkForCardDuplicates(newCard, 2)){
+    const temp = auxList[index];
 
-      this.setState((prevState) => {
-        return {
-          deckCards: prevState.deckCards.concat(aux)
-        }
-      })
-
+    if (temp.quantity == 1) {
+      auxList.splice(index, 1);
+    }
+    else {
+      temp.quantity -= 1;
     }
 
-  };
+    this.setState(() => {
+      return {
+        deckCards: auxList
+      }
+    })
+  }
 
   setFoundCards = ((cards) => {
     this.setState(() => {
@@ -102,7 +117,7 @@ class EditDeckPage extends React.Component {
             <FoundCards cards={this.state.foundCards} handleAddCardToDeck={this.handleAddCardToDeck}/>
           </Grid>
           <Grid className='container' item style={{width: '20%'}}>
-            <DeckCardsListing deckCards={this.state.deckCards}/>
+            <DeckCardsListing deckCards={this.state.deckCards} handleRemoveCardFromDeck={this.handleRemoveCardFromDeck}/>
           </Grid>
         </Grid>
 

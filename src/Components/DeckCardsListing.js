@@ -1,6 +1,6 @@
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Grid from '@material-ui/core/Grid';
 import ListItemText from '@material-ui/core/ListItemText';
 import React from 'react';
 
@@ -11,17 +11,18 @@ class DeckCardsListing extends React.Component {
       <List>
         {this.props.deckCards.map((card) => {
           return( 
-            <div>
-              <ListItem>
-                <ListItemText inset primary={card.name}></ListItemText>
-              </ListItem>
-              <ListItemSecondaryAction>
-                <ListItemText primary=''></ListItemText>
-              </ListItemSecondaryAction>
-            </div>
+            <ListItem button key={card.cardData.name} onClick={() => this.props.handleRemoveCardFromDeck(card.cardData.name)}>
+              <Grid container justify='space-between'>
+                <Grid item>
+                  <ListItemText primary={card.cardData.name}></ListItemText>
+                </Grid>
+                <Grid item>
+                  <ListItemText primary={card.quantity}></ListItemText>
+                </Grid>
+              </Grid>
+            </ListItem>
           )
         })}
-        
       </List>
     )
   }
