@@ -15,8 +15,9 @@ class EditDeckPage extends React.Component {
 
   handleAddCardToDeck = (newCard) => {
 
-    //TODO: Remove hardcoded max amount
+    //TODO: Remove hardcoded max amounts
     const maxAmount = 2;
+    const legendaryLimit = 'Legendary';
 
     this.setState((prevState) => {
 
@@ -27,7 +28,7 @@ class EditDeckPage extends React.Component {
 
         const temp = prevState.deckCards[index];
 
-        if(temp.quantity < maxAmount) {
+        if(temp.quantity < maxAmount && temp.cardData.rarity != legendaryLimit) {
           temp.quantity += 1;
         }
       }
