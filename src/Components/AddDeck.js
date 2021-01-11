@@ -94,6 +94,11 @@ class AddDeck extends React.Component {
     let gameError;
     let formatError;
     let hClassError;
+    const newDeck = {
+      game: this.state.game,
+      format: this.state.format,
+      hClass: this.state.hClass
+    }
 
     if (this.state.game == '') {
       gameError = true;
@@ -119,7 +124,7 @@ class AddDeck extends React.Component {
       return;
     }
 
-    this.props.handleCreateNewDeck(this.state);
+    this.props.handleCreateNewDeck(newDeck);
     
     this.setState(() => {
       return {

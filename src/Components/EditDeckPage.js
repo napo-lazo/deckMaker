@@ -85,11 +85,11 @@ class EditDeckPage extends React.Component {
         this.setState(() => {
           return {
             filtersInfo: {
-              cardQualities: info.qualities,
-              cardRaces: info.races,
-              cardTypes: info.types,
-              standardSets: info.standard,
-              wildSets: info.wild
+              cardQualities: [... new Set(info.qualities)],
+              cardRaces: [... new Set(info.races)],
+              cardTypes: [... new Set(info.types)],
+              standardSets: [... new Set(info.standard)],
+              wildSets: [... new Set(info.wild)]
             }
           }
         });

@@ -16,14 +16,14 @@ import TextField from '@material-ui/core/TextField';
 class EditDeckFilters extends React.Component {
 
   state = {
+    cardRaceDisabled: false,
     checkedClass: true,
     checkedNeutral: true,
     name: '',
     quality: '',
     race: '',
     set: '',
-    type: ''
-    
+    type: ''  
   }
   
   buildApiEndpoint = () => {
@@ -117,11 +117,35 @@ class EditDeckFilters extends React.Component {
 
     const key = event.target.name;
     const value = event.target.value;
+    let cardRaceDisabled;
+    let race;
+
+    //TODO: Remove hardcoded if
+    if (key == 'type') {
+      if (!value || value == 'Minion') {
+        console.log('Not blocked');
+        console.log(value);
+        cardRaceDisabled = false;
+        race = this.state.race;
+      }
+      else {
+        console.log('Blocked');
+        console.log(value);
+        cardRaceDisabled = true;
+        race = '';
+      }
+    }
 
     this.setState(() => {
-      return {
-        [key]: value
+
+      let filters = {[key]: value};
+
+      if (key == 'type') {
+        filters['race'] = race;
+        filters['cardRaceDisabled'] = cardRaceDisabled;
       }
+
+      return (filters);
     })
   }
 
@@ -206,7 +230,7 @@ class EditDeckFilters extends React.Component {
             </FormControl>
           </Grid>
           <Grid container item>
-            <FormControl fullWidth>
+            <FormControl disabled={this.state.cardRaceDisabled} fullWidth>
               <InputLabel>Card Race</InputLabel>
               <Select name='race' onChange={this.onSelectChange} value={this.state.race}>
                 <MenuItem value=''>None</MenuItem>

@@ -40,12 +40,13 @@ class DeckMaker extends React.Component {
 
   handleCreateNewDeck = (addDeckState) => {
 
-    const aux = [addDeckState];
+    const aux = {...addDeckState, index: this.state.decksInfo.length, cards: []};
+    console.log(aux);
 
     this.setState((prevState) => {
       return {
-        activeDeck: addDeckState,
-        decksInfo: prevState.decksInfo.concat(aux)
+        activeDeck: aux,
+        decksInfo: prevState.decksInfo.concat([aux])
       }
     })
   };
