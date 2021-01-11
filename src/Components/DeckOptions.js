@@ -4,7 +4,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
 class DeckOptions extends React.Component {
-
+  
   handleSavingActiveDeck = () => {
     this.props.handleSavingActiveDeck(this.props.cards);
   }
@@ -13,7 +13,7 @@ class DeckOptions extends React.Component {
     return (
       <Grid container spacing='2'>
         <Grid container item>
-          <TextField fullWidth label='Deck Name' variant='outlined' value={this.props.deckName}></TextField>
+          <TextField fullWidth label='Deck Name' onChange={this.props.handleChangingDeckName} variant='outlined' value={this.props.deckName}></TextField>
         </Grid>
         <Grid alignItems='center' container item justify='space-evenly'>
           <Grid item>

@@ -10,7 +10,8 @@ class DeckMaker extends React.Component {
       game: 'hearthstone',
       hClass: 'Warrior',
       format: 'standard',
-      cards: []
+      cards: [],
+      index: 0
     },
     decksInfo: [
       {
@@ -40,7 +41,6 @@ class DeckMaker extends React.Component {
   handleCreateNewDeck = (addDeckState) => {
 
     const aux = [addDeckState];
-    // console.log(addDeckState);
 
     this.setState((prevState) => {
       return {
@@ -49,6 +49,18 @@ class DeckMaker extends React.Component {
       }
     })
   };
+
+  handleChangingDeckName = (event) => {
+    const deck = this.state.activeDeck;
+    deck.name = event.target.value;
+
+    this.setState(() => {
+      return {
+        activeDeck: deck
+      }
+    })
+
+  }
 
   handleExitDeckEditing = () => {
 
@@ -69,16 +81,49 @@ class DeckMaker extends React.Component {
           activeDeck: {...prevState.activeDeck, cards: newCards}
         }
       },
-      this.handleSavingDeck
+      this.handleSavingActiveDeckName
     )
 
   }
 
-  handleSavingDeck = () => {
-
-    console.log(this.state.activeDeck)
+  handleSavingActiveDeckName = () => {
 
     const updatedDeck = this.state.activeDeck;
+    const auxList = Array.from(this.state.decksInfo)
+    const i = updatedDeck.index;
+    let finalName = updatedDeck.name;
+    let index = auxList.findIndex(deck => deck.name == updatedDeck.name);
+
+    if (index != -1 && index != i) {
+      
+      let x = 0;
+
+      while(index != -1){
+        
+        x++;
+        const newName = updatedDeck.name + ' (' + x +')';
+        index = auxList.findIndex(deck => deck.name ==  newName);
+
+      }
+
+      finalName += ' (' + x + ')';
+
+    }
+
+    this.setState(
+      (prevState) => {
+        return {
+          activeDeck: {...prevState.activeDeck, name: finalName}
+        }
+      },
+      this.handleSavingDeck
+    )
+  }
+
+  handleSavingDeck = () => {
+
+    let updatedDeck = Object.assign({}, this.state.activeDeck);
+    const auxList = Array.from(this.state.decksInfo)
     const i = updatedDeck.index;
     delete updatedDeck.index;
 
@@ -110,7 +155,7 @@ class DeckMaker extends React.Component {
         ?
         <DeckCollectionPage decksInfo={this.state.decksInfo} handleCreateNewDeck={this.handleCreateNewDeck} handleSettingActiveDeck={this.handleSettingActiveDeck}/>
         :
-        <EditDeckPage activeDeck={this.state.activeDeck} handleExitDeckEditing={this.handleExitDeckEditing} handleSavingActiveDeck={this.handleSavingActiveDeck}/>
+        <EditDeckPage activeDeck={this.state.activeDeck} handleChangingDeckName={this.handleChangingDeckName} handleExitDeckEditing={this.handleExitDeckEditing} handleSavingActiveDeck={this.handleSavingActiveDeck}/>
       }
       </Box>
     )
