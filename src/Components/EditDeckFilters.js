@@ -71,6 +71,16 @@ class EditDeckFilters extends React.Component {
     return classCards.concat(neutralCards);
   }
 
+  filterCardsByFormat = (cards) => {
+
+    if (this.props.format == 'standard') {
+      cards = cards.filter(card => this.props.filtersInfo.standardSets.includes(card.cardSet));
+    }
+
+    return cards;
+
+  }
+
   filterCardsBySearchFilters = (cards) => {
 
     if(this.state.set){
@@ -160,7 +170,7 @@ class EditDeckFilters extends React.Component {
       })
       .then(response => response.json())
       .then(cards => {
-        console.log(this.filterCardsByClass(cards));
+        cards = this.filterCardsByFormat(cards);
         cards = this.filterCardsByClass(cards)
 
         this.props.setFoundCards(this.filterCardsBySearchFilters(cards));
