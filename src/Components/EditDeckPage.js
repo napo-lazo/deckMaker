@@ -13,20 +13,31 @@ class EditDeckPage extends React.Component {
     deckCards: this.props.activeDeck.cards
   }
 
+  calculateAmountOfCards = (cards) => {
+    let total = 0;
+
+    cards.forEach(card => {
+      total += card.quantity;
+    });
+
+    return total;
+  }
+
   handleAddCardToDeck = (newCard) => {
 
     //TODO: Remove hardcoded max amounts
     const maxAmount = 2;
     const legendaryLimit = 'Legendary';
+    const cardLimit = 30;
+    let auxList = Array.from(this.state.deckCards);
 
-    this.setState((prevState) => {
+    if (this.calculateAmountOfCards(auxList) < cardLimit) {
 
-      let auxList = prevState.deckCards;
       const index = auxList.findIndex(card => card.cardData.name == newCard.name);
-      
+        
       if (index != -1) {
 
-        const temp = prevState.deckCards[index];
+        const temp = auxList[index];
 
         if(temp.quantity < maxAmount && temp.cardData.rarity != legendaryLimit) {
           temp.quantity += 1;
@@ -35,7 +46,12 @@ class EditDeckPage extends React.Component {
       else {
         auxList = auxList.concat([{ cardData: newCard, quantity: 1}])
       }
+    }
+    else {
+      return;
+    }
 
+    this.setState(() => {
       return {
         deckCards: auxList
       }
@@ -118,7 +134,7 @@ class EditDeckPage extends React.Component {
             <FoundCards cards={this.state.foundCards} handleAddCardToDeck={this.handleAddCardToDeck}/>
           </Grid>
           <Grid className='container' item style={{width: '20%'}}>
-            <DeckCardsListing deckCards={this.state.deckCards} handleRemoveCardFromDeck={this.handleRemoveCardFromDeck}/>
+            <DeckCardsListing calculateAmountOfCards={this.calculateAmountOfCards} deckCards={this.state.deckCards} handleRemoveCardFromDeck={this.handleRemoveCardFromDeck}/>
           </Grid>
         </Grid>
 
