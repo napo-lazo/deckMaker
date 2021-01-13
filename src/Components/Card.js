@@ -10,10 +10,14 @@ class Card extends React.Component {
 
   }
 
+  isElectron = () => { 
+    return (typeof process !== "undefined") && process.versions && (process.versions.electron !== undefined); 
+  }
+
   render(){
     return(
       <Box>
-        <img onClick={this.onCardClicked} src={"/Images/card assets/" + this.props.cardInfo.cardId + ".png"} />
+        <img onClick={this.onCardClicked} src={this.isElectron() ? "./../public/Images/card assets/" + this.props.cardInfo.cardId + ".png" : "./Images/card assets/" + this.props.cardInfo.cardId + ".png"} />
       </Box>
     )
   }
