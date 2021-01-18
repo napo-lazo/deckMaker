@@ -1,0 +1,18 @@
+{
+    "decks": [
+        {
+            "name": "My first deck - from file",
+            "game": "hearthstone",
+            "hClass": "Warrior",
+            "format": "standard",
+            "cards": []
+        },
+        {
+            "name": "My second deck - from file",
+            "game": "hearthstone",
+            "hClass": "Hunter",
+            "format": "standard",
+            "cards": []
+        }
+    ]
+}

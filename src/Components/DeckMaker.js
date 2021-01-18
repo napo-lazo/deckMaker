@@ -3,43 +3,47 @@ import DeckCollectionPage from './DeckCollectionPage';
 import EditDeckPage from './EditDeckPage';
 import React from 'react';
 
+let ipcRenderer;
+
+const isElectron = () => { 
+  return (typeof process !== "undefined") && process.versions && (process.versions.electron !== undefined); 
+}
+
+if(isElectron()){ 
+  ({ ipcRenderer } = window.require('electron'));
+}
+
 class DeckMaker extends React.Component {
   state = {
-    activeDeck: {
-      name: 'My first deck',
-      game: 'hearthstone',
-      hClass: 'Warrior',
-      format: 'standard',
-      cards: [],
-      index: 0
-    },
-    decksInfo: [
-      {
-        name: 'My first deck',
-        game: 'hearthstone',
-        hClass: 'Warrior',
-        format: 'standard',
-        cards: []
-      },
-      {
-        name: 'My second deck',
-        game: 'hearthstone',
-        hClass: 'Demon Hunter',
-        format: 'standard',
-        cards: []
-      },
-      {
-        name: 'Frostmage',
-        game: 'hearthstone',
-        hClass: 'Mage',
-        format: 'standard',
-        cards: []
-      }
-    ]
+    activeDeck: null,
+    decksInfo: [] //[
+    //   {
+    //     name: 'My first deck',
+    //     game: 'hearthstone',
+    //     hClass: 'Warrior',
+    //     format: 'standard',
+    //     cards: []
+    //   },
+    //   {
+    //     name: 'My second deck',
+    //     game: 'hearthstone',
+    //     hClass: 'Demon Hunter',
+    //     format: 'standard',
+    //     cards: []
+    //   },
+    //   {
+    //     name: 'Frostmage',
+    //     game: 'hearthstone',
+    //     hClass: 'Mage',
+    //     format: 'standard',
+    //     cards: []
+    //   }
+    // ]
+    ,
+    initialLoading: true
   }
 
   handleCreateNewDeck = (addDeckState) => {
-
     const aux = {...addDeckState, index: this.state.decksInfo.length, cards: []};
 
     this.setState((prevState) => {
@@ -59,13 +63,9 @@ class DeckMaker extends React.Component {
         activeDeck: deck
       }
     })
-
   }
 
   handleExitDeckEditing = () => {
-
-    console.log('exiting')
-
     this.setState(() => {
       return {
         activeDeck: null
@@ -127,15 +127,16 @@ class DeckMaker extends React.Component {
     const i = updatedDeck.index;
     delete updatedDeck.index;
 
-    this.setState((prevState) => {
+    this.setState(
+      (prevState) => {
+        
+        prevState.decksInfo.splice(i, 1, updatedDeck)
+        ipcRenderer.invoke('saveDecks', JSON.stringify( {decks: prevState.decksInfo }))
 
-      prevState.decksInfo.splice(i, 1, updatedDeck)
-
-      return {
-        decksInfo: prevState.decksInfo
-      }
-    })
-
+        return {
+          decksInfo: prevState.decksInfo
+        }
+      });
   }
 
   handleSettingActiveDeck = (index) => {
@@ -147,13 +148,38 @@ class DeckMaker extends React.Component {
     })
 
   }
+  
+  finishInitialLoading = (decks) => {
+    this.setState(() => {
+      return {
+        decksInfo: decks,
+        initialLoading: false
+      }
+    })
+  }
 
+  componentDidMount() {
+
+    if (ipcRenderer) {
+      ipcRenderer.on('finish-loading', (e, data) => {
+        const aux = JSON.parse(data);
+        this.finishInitialLoading(aux.decks);
+      })
+
+      ipcRenderer.invoke('initialDeckLoad');
+    }
+    else {
+      this.finishInitialLoading([]);
+    }
+
+  }
+  
   render() {
     return(
       <Box className='appContainer'>
       {(!this.state.activeDeck) 
         ?
-        <DeckCollectionPage decksInfo={this.state.decksInfo} handleCreateNewDeck={this.handleCreateNewDeck} handleSettingActiveDeck={this.handleSettingActiveDeck}/>
+        <DeckCollectionPage decksInfo={this.state.decksInfo} handleCreateNewDeck={this.handleCreateNewDeck} handleSettingActiveDeck={this.handleSettingActiveDeck} initialLoading={this.state.initialLoading}/>
         :
         <EditDeckPage activeDeck={this.state.activeDeck} handleChangingDeckName={this.handleChangingDeckName} handleExitDeckEditing={this.handleExitDeckEditing} handleSavingActiveDeck={this.handleSavingActiveDeck}/>
       }
